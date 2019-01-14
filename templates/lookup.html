@@ -1,0 +1,142 @@
+ {% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}往年信息查询{% endblock %}
+{% block css %}{% endblock %}
+{% block content %}
+<style type="text/css">
+		body{
+			text-align:center;
+			background:url('../static/css/splash.png'); 	
+			background-size: cover;
+		}
+		body:before {
+			content: "";	
+			display: inline-block;
+			vertical-align: middle;
+		}
+        #selected {
+			border-radius: 10px;
+			background: #464646;
+			padding: 0px 0px;
+			border: none;
+			color: #ffffff;
+			text-transform: uppercase;
+			font-size: 20px;
+			font-family: '楷体';
+			outline: none;
+
+			margin: 0 auto;
+			width: 100px;
+			text-align: center;
+			height: 35px;
+			line-height: 20px;
+		}
+		
+		#selected:hover {
+			color: #ffffff;
+			transform: translate3d(0, 0, 0);
+			backface-visibility: hidden;
+			perspective: 1000px;
+		}
+		
+		@keyframes shake {
+			10%, 90% {
+				transform: translate3d(-1px, 0, 0);
+			}
+			20%, 80% {
+				transform: translate3d(2px, 0, 0);
+			}
+			30%, 50%, 70% {
+				transform: translate3d(-4px, 0, 0);
+			}
+			40%, 60% {
+				transform: translate3d(4px, 0, 0);
+			}
+		}
+		
+		.look{
+			width: 100%;
+			height: 100px;
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			margin: auto;
+			line-height: 100px;
+		}
+		
+		select {
+			display: inline-block;
+			width: 200px;
+			height:40px;
+			margin-left:0px;
+			position: relative;
+			vertical-align: middle;
+			padding: 0;
+			overflow: hidden;
+			background-color: #fff;
+			color: #555;
+			border: 1px solid #aaa;
+			text-shadow: none;
+			border-radius: 25px;
+			transition: box-shadow 0.25s ease;
+			z-index: 2;
+		}
+
+		select:hover {
+			box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+		}
+
+		select:before {
+			content: "";
+			position: absolute;
+			width: 0;
+			height: 0;
+			border: 10px solid transparent;
+			border-top-color: #ccc;
+			top: 14px;
+			right: 10px;
+			cursor: pointer;
+			z-index: -2;
+		}
+		select select {
+			cursor: pointer;
+			padding: 10px;
+			width: 100%;
+			border: none;
+			background: transparent;
+			background-image: none;
+			-webkit-appearance: none;
+			-moz-appearance: none;
+		}
+
+		select select:focus {
+			outline: none;
+		}
+
+
+        </style>
+    <form action="" method="post">
+    {% csrf_token %}
+	<div class="look">
+    <select name="selection">
+        {% if sem3 %}
+            <option name="-1" value="-1">{{ year1 }} - {{ year0 }}春季学期</option>
+            <option name="0" value="0">{{ year1 }} - {{ year0 }}秋季学期</option>
+            {% endif %}
+        {%  if sem2 %}
+             <option name="0" value="0">{{ year1 }} - {{ year0 }}秋季学期</option>
+            {% endif %}
+        <option name="1" value="1">{{ year2 }} -{{ year1 }}夏季学期</option>
+        <option name="2" value="2">{{ year2 }}-{{ year1 }}春季学期</option>
+        <option name="3" value="3">{{ year2 }}-{{ year1 }}秋季学期</option>
+        <option name="4" value="4">{{ year3 }}-{{ year2 }}夏季学期</option>
+        <option name="5" value="5">{{ year3 }}-{{ year2 }}春季学期</option>
+        <option name="6" value="6">{{ year3 }}-{{ year2 }}秋季学期</option>
+        <option name="7" value="7">{{ year4 }}-{{ year3 }}夏季学期</option>
+        <option name="8" value="8">{{ year4 }}-{{ year3 }}春季学期</option>
+        <option name="9" value="9">{{ year4 }}-{{ year3 }}秋季学期</option>
+    </select>
+    <input id="selected" name="submit" value="查询" type="submit" style="text-align:center;margin-left:20px"/>
+	</div>
+    </form>
+{%  endblock %}

@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <title>主页</title>
+
+  <style>
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}table{border-collapse:collapse;border-spacing:0}
+
+</style>
+
+    <style>
+@import url(http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300);
+html{
+  height:100%;
+}
+	#lanren{
+		width:156px;
+		height:156px;
+		position:absolute;
+		left:0;
+		bottom:15px;
+		background:url(../static/css/foxtail.png) no-repeat 0 0;
+		animation:animate-tail 3.75s steps(44) infinite;
+	}
+	@keyframes animate-tail{
+		0%{background-position:-6864px 0;}
+		100%{background-position:0 0;}
+	}
+body{
+  text-align:center;
+  background:url('../static/css/splash.png');
+  	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	background-size: cover;
+  background-position:50% 50%;
+  height:100%;
+  font-family: "楷体";
+    font-size: 20px;
+    font-weight: bold;
+    letter-spacing: 3px;
+
+}
+body:before {
+	content: "";
+	
+	display: inline-block;
+	vertical-align: middle;
+}
+.bar{
+width: 100%;
+    height: 100px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    line-height: 100px;
+}
+#menu{
+	display: inline-block;
+  height:135px;
+  width:80%;
+	vertical-align: middle;
+  white-space: nowrap;
+}
+#menu li {
+position: relative;
+z-index: 2;
+display: block;
+float: left;
+width: 15%;
+height: 135px;
+line-height: 220px;
+margin-right: 1.42857%;
+white-space: nowrap;
+background-position: 50%;
+}
+.classselect{
+  background:url('../static/css/选课-线.png')no-repeat;
+  margin-left: 1.42857%;
+}
+.classwithdraw{
+  background:url('../static/css/删除分类.png')no-repeat;
+}
+.lookuppyfa{
+  background:url('../static/css/说明书.png')no-repeat;
+
+}
+.lookup{
+  background:url('../static/css/搜索相关.png')no-repeat;
+
+}
+.logout{
+  background:url('../static/css/earth-large.png')no-repeat;  
+}
+.dropout{
+	background:url('../static/css/dropout.png')no-repeat; 
+	opacity:0;
+}
+#menu ul{
+  position:relative;
+}
+#menu ul:after{
+  content:"";
+  display:block;
+  clear:both;
+}
+#menu a{
+  color: #515151;
+  text-decoration:none;
+  display:block;
+  width:100%;
+  height:100%;
+
+}
+#menu li:after {
+content: "";
+width: 9.5238%;
+height: 100%;
+position: absolute;
+top: 0;
+right: -9.5238%;
+
+}
+.classselect:before {
+content: "";
+width: 9.5238%;
+height: 100%;
+position: absolute;
+top: 0;
+left: 0%;
+border-radius: 5px 0px 0px 5px;
+}
+.dropout:after{
+  border-radius:0px 5px 5px 0px;
+}
+.current{
+  position:absolute;
+  top:-13px;
+  left:8.92857%;
+  margin-left: -49px;
+  width:95px;
+  height:165px;
+  -webkit-transition: all 400ms cubic-bezier(.45,1.92,.9,1.54);
+-moz-transition: all 400ms cubic-bezier(.45,1.92,.9,1.54);
+-o-transition: all 400ms cubic-bezier(.45,1.92,.9,1.54);
+-ms-transition: all 400ms cubic-bezier(.45,1.92,.9,1.54);
+transition: all 400ms cubic-bezier(.16,1.23,.87,1.18);
+}
+.current-back{
+  width:100%;
+  height:100%;
+  position:absolute;
+  background: #ffffff;
+  border-radius:5px;
+}
+.top-arrow{
+  position:absolute;
+  overflow:hidden;
+  width:100%;
+  height:12px;
+  top:13px;
+  left:0;
+  z-index:2;
+}
+.top-arrow:before{
+  content:"";
+  position:absolute;
+  width:80%;
+  height:10px;
+  top:-10px;
+  left:10%;
+  border-radius:20%;
+  box-shadow:0 0 10px black;
+}
+.top-arrow:after{
+  content:"";
+  position:absolute;
+  width:0;
+  height:0;
+  top:0px;
+  border-top:8px solid #000000;
+  border-left:6px solid transparent;
+  border-right:6px solid transparent;
+  margin-left:-6px;
+  left:50%;
+}
+
+.bottom-arrow{
+  position:absolute;
+  overflow:hidden;
+  width:100%;
+  height:12px;
+  bottom:17px;
+  left:0;
+  z-index:2;
+}
+.bottom-arrow:before{
+  content:"";
+  position:absolute;
+  width:80%;
+  height:10px;
+  bottom:-10px;
+  left:10%;
+  border-radius:20%;
+  box-shadow:0 0 10px black;
+}
+.bottom-arrow:after{
+  content:"";
+  position:absolute;
+  width:0;
+  height:0;
+  bottom:0;
+  border-bottom:12px solid #000000;
+  border-left:8px solid transparent;
+  border-right:8px solid transparent;
+  margin-left:-8px;
+  left:50%;
+}
+
+.classwithdraw:hover ~ .current{
+  left: 25.5%;
+}
+.lookuppyfa:hover ~ .current{
+ left: 42%;
+}
+.lookup:hover ~ .current{  
+   left: 58.5%;
+}
+.logout:hover ~ .current{
+  left: 75%;  
+}
+.dropout:hover ~ .current{
+	opacity:0;
+	left:91.5%;
+}
+.dropout:hover{
+	opacity:1;
+}
+div.foo{
+  width: 90%;
+  margin-left:-220px;
+  text-align: center;
+}
+div.foo1{
+  width: 90%;
+  margin-top:80px;
+  margin-left:130px;
+  text-align: center;
+}
+.letter{
+  display: inline-block;
+  font-weight: 900;
+  font-size: 10em;
+  margin: 0.2em;
+  position: relative;
+  color: #5ef117;
+  transform-style: preserve-3d;
+  perspective: 400;
+  z-index: 1;
+}
+.letter:before, .letter:after{
+  position:absolute;
+  content: attr(data-letter);
+  transform-origin: top left;
+  top:0;
+  left:0;
+}
+.letter, .letter:before, .letter:after{
+  transition: all 0.3s ease-in-out;
+}
+.letter:before{
+  color: #ffffff;
+  text-shadow: 
+    -1px 0px 1px rgba(255,255,255,.8),
+    1px 0px 1px rgba(0,0,0,.8);
+  z-index: 3;
+  transform:
+    rotateX(0deg)
+    rotateY(-15deg)
+    rotateZ(0deg);
+}
+.letter:after{
+  color: rgba(0,0,0,.11);
+  z-index:2;
+  transform:
+    scale(1.08,1)
+    rotateX(0deg)
+    rotateY(0deg)
+    rotateZ(0deg)
+    skew(0deg,1deg);
+}
+.letter:hover:before{
+    color: #000000;
+    transform:
+            rotateX(0deg)
+            rotateY(-40deg)
+            rotateZ(0deg);
+}
+.mainBgd{ 
+            display: none; 
+            position: absolute; 
+            top: 0%; 
+            left: 0%; 
+            width: 100%; 
+            height: 100%; 
+            background-color: black; 
+            z-index:1001; 
+            -moz-opacity: 0.8; 
+            opacity:.50; 
+            filter: alpha(opacity=88); 
+        } 
+.floatBgd{ 
+            display: none; 
+            position: absolute; 
+            top: 5%; 
+            left: 35%; 
+            width: 26.8%; 
+            height: 70%; 
+            padding: 10px; 
+			background-image:url(../static/css/xiaolaodi.jpg);
+            background-color: white; 
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: contain;
+            z-index:1002; 
+            overflow: auto;  
+        } 
+
+</style>
+
+<script>
+function openDialog(){
+    document.getElementById("floatWindow").style.display   = "block";
+    document.getElementById("mainInterface").style.display = "block";
+}
+
+function closeDialog(){
+    document.getElementById("floatWindow").style.display   = "none";
+    document.getElementById("mainInterface").style.display = "none";
+}
+function changeBkg(){
+	document.getElementById("floatWindow").style.backgroundImage="url(../static/css/buzhidao.jpg)";
+	document.getElementById("floatWindow").style.height="80%";
+	document.getElementById("ask").style.display   = "none";
+	document.getElementById("xianghaole").style.display   = "none";
+	document.getElementById("jiushi").style.display   = "block";
+}
+</script>
+
+    <script src="../static/js/prefixfree.min.js"></script>
+<script src="../static/js/modernizr.js"></script>
+<script src='../static/js/jquery.js'></script>
+
+</head>
+
+<body>
+<div class="foo">
+  <span class="letter" data-letter=S>S</span>
+  <span class="letter" data-letter=U>U</span>
+</div>
+<div class="foo1" style="margin-top:120px">
+<span class="letter" data-letter=S>S</span>
+  <span class="letter" data-letter=T>T</span>
+  <span class="letter" data-letter=C>C</span>
+</div>
+
+</div>
+<div class="bar">
+  <nav id="menu">
+  <div style="text-align:center;clear:both">
+</div>
+     <ul>
+      <li class="classselect"><a href="/classselect/">选课</a></li>
+      <li class="classwithdraw"><a href="/classwithdraw/">退课</a></li>
+      <li class="lookuppyfa"><a href="/lookuppyfa/">查询培养方案</a></li>
+      <li class="lookup" ><a href="/lookup/">往年记录</a></li>
+      <li class="logout"><a href="/logout/">登出</a></li>
+	  <li class="dropout"><a href="javascript:void(0);" onclick="openDialog()">一键退学</a></li>
+  <div class="current"> 
+    <div class="top-arrow"></div>   
+    <div class="current-back"></div>
+    <div class="bottom-arrow"></div>
+  </div>
+    </ul>
+</nav>
+</div>
+  <script src="../static/js/index.js"></script>
+<div id="lanren"></div>
+<div id = "floatWindow" class = "floatBgd">
+	<p id="ask">听说你要退学？</p>
+	<button id="xianghaole" style="margin-top:420px" onclick="changeBkg()">我已经想好了</button>
+	<a href="/dropout/"><button id="jiushi" style="margin-left:140px;margin-top:507px;display:none" onclick="">就是想好了</button></a>
+</div>
+	<div id = "mainInterface" class = "mainBgd"></div> 
+</body>
+
+</html>

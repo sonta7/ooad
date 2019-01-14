@@ -1,0 +1,11 @@
+@CHARSET "UTF-8";
+body{
+    background-image: url(bkg2.jpg);
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
+
+label.passtag{
+	width:100px;
+}

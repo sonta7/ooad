@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+
+
+{% block title %}分数查看{% endblock %}
+{% block content %}
+
+<style type="text/css">
+		body{
+			text-align:center;	
+			background-size: cover;
+		}
+		body:before {
+			content: "";	
+			display: inline-block;
+			vertical-align: middle;
+		}
+		
+		button {
+			border-radius: 10px;
+			background: #515151;
+			padding: 0px 0px;
+			border: none;
+			color: #ffffff;
+			text-transform: uppercase;
+			font-size: 15px;
+			font-family: '楷体';
+			outline: none;
+
+			margin: 0 auto;
+			width: 100px;
+			text-align: center;
+			height: 30px;
+			line-height: 20px;
+		}
+		
+		button:hover {
+			color: #000000;
+			transform: translate3d(0, 0, 0);
+			backface-visibility: hidden;
+			perspective: 1000px;
+		}
+		
+		@keyframes shake {
+			10%, 90% {
+				transform: translate3d(-1px, 0, 0);
+			}
+			20%, 80% {
+				transform: translate3d(2px, 0, 0);
+			}
+			30%, 50%, 70% {
+				transform: translate3d(-4px, 0, 0);
+			}
+			40%, 60% {
+				transform: translate3d(4px, 0, 0);
+			}
+		}
+		
+</style>
+
+ <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.css">
+<table id="table" class="display table  table-hover" data-toggle="table"
+                     data-url= '{{ select_year }}/{{ select_sememster }}'
+
+                data-method="get"
+                data-show-columns="true"
+                data-pagination="true"
+                data-side-pagination="server"
+                data-page-list="[10, 20, 50, 100, 200]"
+                data-search="true" data-mobile-responsive="true" searchOnEnterKey="true"
+                data-show-refresh="true" data-show-columns="true"
+                data-show-toggle="true" data-page-size=20 data-unique-id="asset_id"
+                data-striped="false">
+
+    <script src="/static/js/jquery-3.2.1.min.js"></script>
+</table>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="/static/js/bootstrap-table.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+
+    <!-- Latest compiled and minified Locales -->
+    <script src="/static/js/bootstrap-table-zh-CN.min.js"></script>
+
+  <script type="text/javascript">
+
+
+
+
+
+
+    $('#table').bootstrapTable(
+       {
+
+
+           columns: [{
+               field: 'coursecode',
+               title: '课程代码'
+           },
+               {
+                   field: 'coursename',
+                   title: '课程名'
+               },
+               {
+                   field: 'score',
+                   title: '分数'
+               }
+           ],
+
+
+
+       }
+
+
+
+
+);
+
+
+
+
+
+
+
+</script>
+
+
+<a href=""><button style="margin-bottom:15px;margin-top:15px">返回</button></a>
+{% endblock %}
+

@@ -1,0 +1,254 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}退课{% endblock %}
+{% block content %}
+<script src="../static/js/jquery-3.2.1.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="../static/js/bootstrap.js"></script>
+    <script src="../static/js/bootstrap-table.js"></script>
+
+    <!-- Latest compiled and minified Locales -->
+    <script src="../static/js/bootstrap-table-zh-CN.min.js"></script>
+	<script src="../static/js/ui.js"></script>
+	<script src="../static/js/jquery-3.2.1.min.js"></script>
+<style type="text/css">
+		body{
+			text-align:center;	
+			background-size: cover;
+			background-position:50% 50%;
+		}
+		body:before {
+			content: "";	
+			display: inline-block;
+			vertical-align: middle;
+		}
+        #selectBnt {
+			border-radius: 10px;
+			background: #30c9e8;
+			padding: 0px 0px;
+			border: none;
+			color: #ffffff;
+			text-transform: uppercase;
+			font-size: 15px;
+			font-family: '楷体';
+			outline: none;
+
+			margin: 0 auto;
+			width: 100px;
+			text-align: center;
+			height: 30px;
+			line-height: 20px;
+		}
+		
+		#selectBnt:hover {
+			color: #000000;
+			animation: shake 0.82s cubic-bezier(.36, .07, .19, .97) both;
+			transform: translate3d(0, 0, 0);
+			backface-visibility: hidden;
+			perspective: 1000px;
+		}
+		
+		@keyframes shake {
+			10%, 90% {
+				transform: translate3d(-1px, 0, 0);
+			}
+			20%, 80% {
+				transform: translate3d(2px, 0, 0);
+			}
+			30%, 50%, 70% {
+				transform: translate3d(-4px, 0, 0);
+			}
+			40%, 60% {
+				transform: translate3d(4px, 0, 0);
+			}
+		}
+		
+		.win { display: none; }
+.mask-layer { position: fixed; width: 100%; height: 100%; opacity: 0.5; filter: alpha(opacity=50); background-color: black; z-index: 99998; top: 0px; left: 0px; }
+.window-panel { position: fixed; z-index: 99999; top: 50%; left: 50%; background-color: white; border-radius: 4px; }
+.window-panel .title-panel { position: absolute; height: 36px; width: 100%; border-radius: 4px 4px 0 0; }
+.window-panel .title { position: absolute; height: 36px; width: 100%; text-align: center; border-radius: 4px 4px 0 0; line-height: 36px; vertical-align: middle; background-color: whitesmoke; /*标题背景色*/ border-bottom: 1px solid rgb(233, 233, 233); z-index: 1; }
+.window-panel h3 { font-size: 16px; margin: 0; }
+.window-panel .close-btn { display: block; text-align: center; vertical-align: middle; position: absolute; width: 36px; height: 36px; line-height: 36px; right: 0px; text-decoration: none; font-size: 24px; color: black; background-color: #DBDBDB; border-radius: 2px; z-index: 1; }
+.window-panel .close-btn:hover { background-color: #ccc; }
+.window-panel .body-panel { position: absolute; width: 100%; top: 36px; border-radius: 0 0 4px 4px; z-index: 1;background: #fff;background-image: url(../images/wenli.png); }
+.window-panel .body-panel.toast-panel{ position: absolute;color:#fff;background:rgba(0,0,0,0.3); }
+.window-panel .content, .window-panel .btns { text-align: center; }
+.window-panel .content { padding: 10px 10px 0px 10px; font-size: 16px; min-height: 40px; line-height: 22px; }
+.window-panel .content.toast-content{padding:0;min-height:0;}
+.window-panel .w-btn { display: inline-block; width: 60px; height: 26px; line-height: 26px; background-color: #DE5923; color: white; cursor: pointer; text-align: center; border-radius: 2px; text-decoration: none; margin: 0 10px 0px 10px; border: none; }
+.window-panel .w-btn:hover { background-color: #DA3E00; }
+.window-panel .w-btn:focus { outline: 0 none; }
+
+		</style>
+    <script>
+    function actionFormatter(value,row,index) {
+          return '<button id="selectBnt" class="mod" >退课</button> ';
+
+
+    }
+    window.actionEvents = {
+
+  'click .mod': function(e, value, row, index) {
+      var a = row.courseid
+     var url = "classwithdraw/"+a
+      function confirmed() {
+          var msg = "确认退课？"
+          if(confirm(msg)==true){
+              return true;
+          }else{
+              return false;
+          }
+      }
+      if(confirmed()) {
+          $.get(url, {}, function (data) {
+              mizhu.toast(data);
+              if(data=="退课成功") {			  
+                  setTimeout(function () {
+                    window.location.reload();
+					}, 700);
+              }
+          })
+      }
+
+     //修改操作
+     }
+
+
+  }
+
+    </script>
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.css">
+<table id="show" class="display table  table-hover" data-toggle="table"
+                data-url="{% url 'showcourse' 'withdraw' %}"
+                data-method="get"
+                data-show-columns="true"
+                data-pagination="true"
+                data-side-pagination="server"
+                data-page-list="[10, 20, 50, 100, 200]"
+                data-search="true" data-mobile-responsive="true" searchOnEnterKey="true"
+                data-show-refresh="true" data-show-columns="true"
+                data-show-toggle="true" data-page-size=20 data-unique-id="asset_id"
+                data-striped="false"
+                >
+              <thead >
+                    <tr>
+                        <th data-field="courseid" data-align="center">Id</th>
+                    <th data-field="coursecode" data-align="center">课程编号</th>
+                    <th data-field="coursename" data-align="center">课程名称</th>
+                        <th data-field="teacher" data-align="center">任课教师</th>
+                        <th data-field="time" data-align="center">上课时间</th>
+                        <th data-field="credit" data-align="center">学分</th>
+                        <th data-field="capacity" data-align="center">课余量</th>
+                        <th data-field="operation" data-formatter="actionFormatter" data-events="actionEvents"}>选择</th>
+`
+
+                     </tr>
+
+              </thead>
+
+
+
+                <style type="text/css">
+            table{
+                border: 1px solid #ccc;
+                border-collapse: collapse;
+                text-align: center;
+            }
+            tr,th,td{
+                width: 160px;
+                height: 60px;
+                border: 1px solid #ccc;
+				text-align:center;
+            }
+
+        </style>
+
+            <table  align="center" style="margin-bottom:20px">
+            <caption>当前学期课表：您还剩{{ score1 }}分可以选择。</caption>
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>星期一</th>
+                    <th>星期二</th>
+                    <th>星期三</th>
+                    <th>星期四</th>
+                    <th>星期五</th>
+                    <th>星期六</th>
+                    <th>星期日</th>
+                </tr>
+
+            </thead>
+            <tbody>
+                <tr>
+                    <td rowspan="2">上午</td>
+
+                   <td class="Mon"></td>
+                    <td class="Tue"></td>
+                    <td class="Wed"></td>
+                    <td class="Thu"></td>
+                    <td class="Fri"></td>
+                    <td class="Sat"></td>
+                    <td class="Sun"></td>
+                </tr>
+                <tr>
+                   <td class="Mon"></td>
+                    <td class="Tue"></td>
+                    <td class="Wed"></td>
+                    <td class="Thu"></td>
+                    <td class="Fri"></td>
+                    <td class="Sat"></td>
+                    <td class="Sun"></td>
+                </tr>
+
+                <tr>
+                    <td rowspan="2">下午</td>
+                    <td class="Mon"></td>
+                    <td class="Tue"></td>
+                    <td class="Wed"></td>
+                    <td class="Thu"></td>
+                    <td class="Fri"></td>
+                    <td class="Sat"></td>
+                    <td class="Sun"></td>
+                </tr>
+                <tr>
+
+                   <td class="Mon"></td>
+                    <td class="Tue"></td>
+                    <td class="Wed"></td>
+                    <td class="Thu"></td>
+                    <td class="Fri"></td>
+                    <td class="Sat"></td>
+                    <td class="Sun"></td>
+                </tr>
+            <tr>
+                    <td rowspan="1">晚上</td>
+                    <td class="Mon"></td>
+                    <td class="Tue" id=1></td>
+                    <td class="Wed"></td>
+                    <td class="Thu"></td>
+                    <td class="Fri"></td>
+                    <td class="Sat"></td>
+                    <td class="Sun"></td>
+                </tr>
+
+
+            </tbody>
+        </table>
+
+
+{% for course in courses %}
+   {%  for time in course.time.all %}
+       
+        <script>
+        var a = document.getElementsByClassName('{{ time.day }}')
+        a.item(parseInt({{ time.number_choice }})-1).textContent = '{{ course.lession.name }},{{ course.teacher }}'
+        </script>
+   {%  endfor  %}
+
+
+
+
+{%  endfor %}
+
+{% endblock %}

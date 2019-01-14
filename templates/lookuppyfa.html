@@ -1,0 +1,210 @@
+ {% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}培养方案查询{% endblock %}
+{% block content %}
+
+<style type="text/css">
+html{
+  height:100%;
+}
+*{margin:0;padding:0;}
+	#lanren{
+		width:240px;
+		height:320px;
+		position:absolute;
+		left:10px;
+		bottom:15px;
+		background:url(../static/css/dola.png) no-repeat 0 0;
+		animation:animate-tail 0.5s steps(3) infinite;
+	}
+	@keyframes animate-tail{
+		0%{background-position:-750px 0;}
+		100%{background-position:0 0;}
+	}
+		body{
+			text-align:center;
+			background:url('../static/css/splash.png'); 	
+			background-size: cover;
+		}
+		body:before {
+			content: "";	
+			display: inline-block;
+			vertical-align: middle;
+		}
+        #sub {
+			border-radius: 10px;
+			background: #464646;
+			padding: 0px 0px;
+			border: none;
+			color: #ffffff;
+			text-transform: uppercase;
+			font-size: 20px;
+			font-family: '楷体';
+			outline: none;
+
+			margin: 0 auto;
+			width: 100px;
+			text-align: center;
+			height: 35px;
+			line-height: 20px;
+		}
+		
+		#sub:hover {
+			color: #000000;
+			transform: translate3d(0, 0, 0);
+			backface-visibility: hidden;
+			perspective: 1000px;
+		}
+		
+		@keyframes shake {
+			10%, 90% {
+				transform: translate3d(-1px, 0, 0);
+			}
+			20%, 80% {
+				transform: translate3d(2px, 0, 0);
+			}
+			30%, 50%, 70% {
+				transform: translate3d(-4px, 0, 0);
+			}
+			40%, 60% {
+				transform: translate3d(4px, 0, 0);
+			}
+		}
+		
+		.look{
+			width: 100%;
+			height: 100px;
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			margin: auto;
+			line-height: 100px;
+		}
+		
+		select {
+			display: inline-block;
+			width: 200px;
+			height:40px;
+			margin-left:0px;
+			position: relative;
+			vertical-align: middle;
+			padding: 0;
+			overflow: hidden;
+			background-color: #fff;
+			color: #555;
+			border: 1px solid #aaa;
+			text-shadow: none;
+			border-radius: 25px;
+			transition: box-shadow 0.25s ease;
+			z-index: 2;
+		}
+
+		select:hover {
+			box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+		}
+
+		select:before {
+			content: "";
+			position: absolute;
+			width: 0;
+			height: 0;
+			border: 10px solid transparent;
+			border-top-color: #ccc;
+			top: 14px;
+			right: 10px;
+			cursor: pointer;
+			z-index: -2;
+		}
+		select select {
+			cursor: pointer;
+			padding: 10px;
+			width: 100%;
+			border: none;
+			background: transparent;
+			background-image: none;
+			-webkit-appearance: none;
+			-moz-appearance: none;
+		}
+
+		select select:focus {
+			outline: none;
+		}
+
+
+        </style>
+
+    <form action="" method="post">
+	<div class="look">
+    {% csrf_token %}
+    <select name="selection">
+
+        {% for x in department %}
+            {% if x == user.department %}
+
+            <option name="{{ x.name }}" value="{{ x.name  }}"   selected = "selected">{{ x.name }}</option>
+
+
+            {% else %}
+            <option name="{{ x.name }}" value="{{ x.name  }}">{{ x.name }}</option>
+            {% endif %}
+
+        {% endfor %}
+
+
+
+
+    </select>
+    <select name="type" style="margin-left:10px">
+        <option name="compulsory" value="compulsory"   selected = "selected">专业必修</option>
+        <option name="selective" value="selective">专业选修</option>
+    </select>
+
+
+        <input id="sub" name="submit" value="查询" type="submit" style="margin-left:10px" />
+    </form>
+
+<script>
+var choosen=[
+    "艺术",
+    "哲学",
+    "人文",
+    "社科"
+]
+function show(){
+
+    var a = document.getElementById('select');
+   var slt = document.getElementById('type');
+
+      if(a.options[a.selectedIndex].textContent == '通识选修') {
+          for (var i = 0; i < choosen.length; i++) {
+              slt.options.add(new Option(choosen[i]))
+          }
+      }
+      else{
+       for(var i = 0; i < choosen.length;i++){
+           slt.options.remove(slt.options.length-1)
+       }
+      }
+
+
+}
+</script>
+
+    <form action="" method="post">
+    {% csrf_token %}
+    <select name ="selection" id="select" onchange="show()"">
+                <option name="compulsory" value="compulsory"   selected = "selected">通识必修</option>
+                <option name="selective" value="selective">通识选修</option>
+
+    </select>
+        <select name="type" id="type" style="margin-left:10px">
+              <option selected="selected">---</option>
+        </select>
+
+     <input id="sub" name="submit2" value="查询" type="submit" style="margin-left:10px" />
+	 </div>
+    </form>
+	
+	<div id="lanren"></div>
+
+{%  endblock %}

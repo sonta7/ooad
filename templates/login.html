@@ -1,0 +1,169 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}登录{% endblock %}
+{% block css %}
+<link href="http://cdn.bootcss.com/jqueryui/1.11.0/jquery-ui.min.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="{% static 'css/default.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+{% endblock %}
+
+
+
+{% block content %}
+<script src="../static/js/prefixfree.min.js"></script>
+<script src="../static/js/modernizr.js"></script>
+<script src='../static/js/jquery.js'></script>
+
+<style type="text/css">
+            html{
+  height:100%;
+}
+*{margin:0;padding:0;}
+	#lanren{
+		width:156px;
+		height:156px;
+		position:absolute;
+		left:0;
+		bottom:15px;
+		background:url(../static/css/foxtail.png) no-repeat 0 0;
+		animation:animate-tail 3.75s steps(44) infinite;
+	}
+	@keyframes animate-tail{
+		0%{background-position:-6864px 0;}
+		100%{background-position:0 0;}
+	}
+body{
+  background:url('../static/css/splash.png');
+  	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	background-size: cover;
+  background-position:0% 0%;
+}
+body:before {
+	content: "";
+	
+	display: inline-block;
+	vertical-align: middle;
+}
+
+
+.form-group{
+	border-radius:30px;
+}
+
+@keyframes fadein{
+0% {opacity:1;}
+50% {opacity:0.3;}
+100% {opacity:1;}
+}
+
+#submit{
+	background-color:#515151;
+}
+
+#submit:hover{
+	animation: fadein 5s;
+}
+
+*, *:before, *:after{
+  box-sizing:border-box;
+}
+body{
+  font-family: 'Lato', sans-serif;
+}
+div.foo{
+  width: 90%;
+  margin: 0 auto;
+  text-align: center;
+}
+.letter{
+  display: inline-block;
+  font-weight: 900;
+  font-size: 8em;
+  margin: 0.2em;
+  position: relative;
+  color: #5ef117;
+  transform-style: preserve-3d;
+  perspective: 400;
+  z-index: 1;
+}
+.letter:before, .letter:after{
+  position:absolute;
+  content: attr(data-letter);
+  transform-origin: top left;
+  top:0;
+  left:0;
+}
+.letter, .letter:before, .letter:after{
+  transition: all 0.3s ease-in-out;
+}
+.letter:before{
+  color: #ffffff;
+  text-shadow: 
+    -1px 0px 1px rgba(255,255,255,.8),
+    1px 0px 1px rgba(0,0,0,.8);
+  z-index: 3;
+  transform:
+    rotateX(0deg)
+    rotateY(-15deg)
+    rotateZ(0deg);
+}
+.letter:after{
+  color: rgba(0,0,0,.11);
+  z-index:2;
+  transform:
+    scale(1.08,1)
+    rotateX(0deg)
+    rotateY(0deg)
+    rotateZ(0deg)
+    skew(0deg,1deg);
+}
+.letter:hover:before{
+    color: #000000;
+    transform:
+            rotateX(0deg)
+            rotateY(-40deg)
+            rotateZ(0deg);
+}
+
+
+			
+        </style>
+    <div class="container">
+        <div class="col-md-4 col-md-offset-4">
+          <form class='form-login' action="/login/" method="post">
+
+              {% if message %}
+                  <div class="alert alert-warning">{{ message }}</div>
+              {% endif %}
+              {% csrf_token %}
+              <h2 class="text-center">欢迎登录</h2>
+
+               <div class="form-group">
+  {{ login_form.username.label_tag }}
+  {{ login_form.username}}
+</div>
+<div class="form-group">
+  {{ login_form.password.label_tag }}
+  {{ login_form.password }}
+</div>
+
+
+              <button type="reset" class="btn btn-default pull-left">重置</button>
+              <button id="submit" type="submit" class="btn btn-primary pull-right">提交</button>
+
+          </form>
+        </div>
+    </div> <!-- /container -->
+	<div id="lanren"></div>
+	</div>
+  <div class="foo">
+  <span class="letter" data-letter=S>S</span>
+  <span class="letter" data-letter=U>U</span>
+  <span class="letter" data-letter=S>S</span>
+  <span class="letter" data-letter=T>T</span>
+  <span class="letter" data-letter=C>C</span>
+
+</div>
+</body>
+{% endblock %}
